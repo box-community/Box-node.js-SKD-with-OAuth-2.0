@@ -36,19 +36,25 @@ const server = http.createServer((req, res) => {
   } else if (pathname === '/account') {
     const code = query.code;
     if (code) {
-        console.log(code)
         sdk.getTokensAuthorizationCodeGrant(code, null, function(err, tokenInfo) {
             let client = sdk.getPersistentClient(tokenInfo);
 
             res.writeHead(200, {
-                'Content-type': 'text/html'
+              'Content-type': 'text/html'
             });
 
+            let name = ''
+            let output = templateAccount
             const user = client.users.get(client.CURRENT_USER_ID);
-            console.log(user)
-    
-            const output = templateAccount
-            res.end(output);
+            user.then((val => {
+              name = val.name
+              id = val.id;
+              output = templateAccount.replace('{%USER_NAME%}', name).replace('{%USER_ID%}', id);
+              res.end(output);
+            })).catch((err) => {
+              console.log(err)
+              res.end('<h1>Could not fetch data</h1>');
+            })
         });
     } else {
         res.writeHead(401, {
@@ -67,4 +73,3 @@ const server = http.createServer((req, res) => {
 server.listen(8000, '127.0.0.1', () => {
     console.log('Listening to requests on port http://localhost:8000');
 });
-
