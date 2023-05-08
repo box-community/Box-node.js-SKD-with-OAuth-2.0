@@ -3,14 +3,19 @@ const fs = require('fs');
 const url = require('url');
 
 const BoxSDK = require('box-node-sdk');
+const PORT = process.env.PORT || 8000;
+
+if (process.env.NODE_ENV !== 'production') {
+  require('dotenv').config();
+}
 
 var sdk = new BoxSDK({
-	clientID: 'clientID',
-	clientSecret: 'clientSecret'
+  clientID: process.env.CLIENT_ID,
+  clientSecret: process.env.CLIENT_SECRET
 });
 
 var authURL = sdk.getAuthorizeURL({
-	response_type: 'code'
+  response_type: 'code'
 });
 
 const templateLogin = fs.readFileSync(
@@ -70,6 +75,6 @@ const server = http.createServer((req, res) => {
   }
 });
 
-server.listen(8000, '127.0.0.1', () => {
-    console.log('Listening to requests on port http://localhost:8000');
+server.listen(PORT, '127.0.0.1', () => {
+    console.log(`Listening to requests on port http://localhost:${PORT}`);
 });
