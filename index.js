@@ -23,7 +23,7 @@ app.use(
   // Session default in memory store not production ready. Will leak memory over time
   // Use redis or some other MemoryStore impl.
   session({
-    secret: '68747470733a2f2f747769747465722e636f6d2f6d617443686f6a65636b79',
+    secret: process.env.SESSION_SECRET,
     resave: false,
     saveUninitialized: true,
     // cookie: { secure: true } // secure will set cookies only on https but we in localhost here
@@ -56,7 +56,7 @@ app.get('/login', (req, res) => {
 });
 
 
-app.get('/authorize_callback/:code', async (req, res) => {
+app.get('/authorize_callback', async (req, res) => {
   const { code } = req.query;
 
   if (!code) return res.status(401).send("Access denied");
@@ -69,15 +69,15 @@ app.get('/authorize_callback/:code', async (req, res) => {
   req.session.user = user;
   req.session.user_token = tokenInfo; // Split storing access token and refresh token for production
 
-  req.redirect('/account');
+  res.redirect('/');
 });
 
-app.post('/logout', (req, req) => {
-  req.session.destroy(); // Removes session data from req object
+app.get('/logout', (req, res) => {
+  req.session.destroy();
   res.redirect('/login');
 })
 
-// WIldcard for not defined URLs
+// Wildcard for not defined URLs
 app.use('*', (req, res) => {
   res.setHeader('Content-type', 'text/html')
   res.status(404).header().end('<h1>Page not found!</h1>');
