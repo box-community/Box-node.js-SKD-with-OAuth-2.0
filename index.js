@@ -30,12 +30,12 @@ app.use(
   })
 );
 
+app.use(express.static(__dirname + '/static'));
+
 app.set('view engine', 'hbs');
 app.set('views', path.join(__dirname, 'templates'));
 
 // All restricted pages should use this middleware
-// Well tbh honest most secure would be to use app.use(auth_middleware) for all app and exclude public pages
-// But this way is easier :D
 const auth_middleware = (req, res, next) => {
   if (req.session.user) return next();
 
@@ -54,7 +54,6 @@ app.get('/', auth_middleware, (req, res) => {
 app.get('/login', (req, res) => {
   res.render('login', { login_url: authURL });
 });
-
 
 app.get('/authorize_callback', async (req, res) => {
   const { code } = req.query;
