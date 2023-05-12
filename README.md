@@ -1,4 +1,7 @@
-![Box Dev logo](/static/box-dev-logo.png)
+<img src="/static/box-dev-logo.png" 
+alt= "Box Dev Logo"
+style="margin-left:-10px;"
+width="40%">
 
 # Box-node.js-SKD-with-OAuth-2.0
 This project is a sample Node.js app featuring Box node.js SKD with OAuth 2.0.
