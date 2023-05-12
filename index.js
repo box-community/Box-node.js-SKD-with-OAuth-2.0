@@ -33,7 +33,7 @@ app.use(
 app.use(express.static(__dirname + '/static'));
 
 app.set('view engine', 'hbs');
-app.set('views', path.join(__dirname, 'templates'));
+app.set('views', path.join(__dirname, 'views'));
 
 // All restricted pages should use this middleware
 const auth_middleware = (req, res, next) => {
