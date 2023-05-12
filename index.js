@@ -35,6 +35,10 @@ app.use(express.static(__dirname + '/static'));
 app.set('view engine', 'hbs');
 app.set('views', path.join(__dirname, 'views'));
 
+app.get('/login', (req, res) => {
+  res.render('login', { login_url: authURL });
+});
+
 // All restricted pages should use this middleware
 const auth_middleware = (req, res, next) => {
   if (req.session.user) return next();
@@ -49,10 +53,6 @@ app.get('/', auth_middleware, (req, res) => {
     name: user.name,
     id: user.id
   })
-});
-
-app.get('/login', (req, res) => {
-  res.render('login', { login_url: authURL });
 });
 
 app.get('/authorize_callback', async (req, res) => {
