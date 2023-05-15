@@ -10,7 +10,10 @@ Read a step-by-step guide in [this Medium blog post](https://medium.com/@stefani
 
 # Run project
 
-Create Box developer account. Create Box app. Add Box client secret and client id. Add session secret key
+1. Create Box developer account.
+2. Create Box custom app in Dev Console, choose user autentication with OAuth 2.0.
+3. Add Box client secret and client id to the .env file.
+4. Add a session secret key to the .env file.
 
 ```
 npm install
