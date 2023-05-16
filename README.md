@@ -10,11 +10,11 @@ Read a step-by-step guide in [this Medium blog post](https://medium.com/@stefani
 
 # Run project
 
-1. Use or create a [sandbox environment] (https://support.box.com/hc/en-us/articles/360043697274-Managing-developer-sandboxes-for-Box-admins#:~:text=Using%20the%20Admin%20Console's%20Sandboxes,right%20corner%2C%20click%20Create%20Sandbox.) or a [free account] (https://account.box.com/signup/personal?tc=annual)
-2. Navigate to [Dev Console] (https://app.box.com/developers/console)
-3. Create Box custom app 
+1. Use or create a [sandbox environment](https://support.box.com/hc/en-us/articles/360043697274-Managing-developer-sandboxes-for-Box-admins#:~:text=Using%20the%20Admin%20Console's%20Sandboxes,right%20corner%2C%20click%20Create%20Sandbox.) or a [free account](https://account.box.com/signup/personal?tc=annual)
+2. Navigate to [Dev Console](https://app.box.com/developers/console).
+3. Create Box custom app.
 4. Choose user autentication with OAuth 2.0.
-5. Copu the Box client secret and client ID from Dev Console and paste them to to the .env file.
+5. Copy the Box client secret and client ID from Dev Console and paste them to to the .env file.
 6. Generate a session secret key to the .env file.
 
 ```
